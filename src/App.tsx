@@ -4,7 +4,7 @@ import svg from './car.svg'
 import { Counter } from './Counter'
 
 export const App = () => {
-  const hello = 'ijij'
+ const testVar= "uihuihui"
   return (
     <>
       <div>React TS Webpack v1.01</div>
