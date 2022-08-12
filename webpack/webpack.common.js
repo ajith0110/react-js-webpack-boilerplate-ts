@@ -1,8 +1,13 @@
 const path =require('path');
 const HtmlWebpackPlugin =require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
-module.exports={
+const smp = new SpeedMeasurePlugin();
+const swcrc= require('../swc.config.json')
+
+
+module.exports=smp.wrap({
     entry:path.resolve(__dirname,'..','./src/index.tsx'),
     resolve:{
         extensions:['.tsx','.ts','.js']
@@ -14,12 +19,25 @@ module.exports={
             exclude:/node_modules/,
             use:[
                 {
-                    loader:'babel-loader'
+                    loader:'swc-loader',
+                    options:swcrc
                 }
             ]
+            // use:[
+            //     {
+            //         loader:'babel-loader'
+            //     }
+            // ]
         },{
             test:/\.(sass|css|scss)$/,
-            use:['style-loader','css-loader']
+            use:['style-loader',{
+                loader:'esbuild-loader',
+                options:{
+                    loader:"css",
+                    minify:true
+                }
+
+            },'css-loader']
         }, {
             test: /\.(png|svg|jpg|jpeg|gif)/,
             type: 'asset/resource'
@@ -36,4 +54,4 @@ module.exports={
     plugins:[new HtmlWebpackPlugin({
         template:path.resolve(__dirname,'..','./src/index.html')
     })]
-}
+})

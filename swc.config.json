@@ -1,0 +1,23 @@
+{
+    "minify":true,
+    "jsc":{
+        "parser":{
+            "syntax": "typescript",
+      "tsx": true,
+      "decorators": false,
+      "dynamicImport": true
+        },
+        "minify":{
+            
+            "compress": true,
+    "mangle": true,
+    "sourceMap":false
+        },
+        "transform":{
+            "react":{
+                "runtime":"automatic"
+            }
+        }
+    }
+    
+}
