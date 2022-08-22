@@ -1,20 +1,19 @@
 // import "./style.css";
-import { createContext, lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import image from './b.jpg'
-import svg from './car.svg'
-import NotFound from './components/404'
-import About from './components/About'
+import { createContext } from 'react'
+// import { Route, Routes } from 'react-router-dom'
+// import image from './b.jpg'
+// import svg from './car.svg'
+// import NotFound from './components/404'
+// import About from './components/About'
+import Counter from './components/counter/Counter'
 import Persons, { hairStyle } from './components/Persons'
-
-import { Counter } from './Counter'
 
 interface IAppContext {
   name: string
   age: number
 }
 
-const Home = lazy(() => import('./components/Home'))
+// const Home = lazy(() => import('./components/Home'))
 const AppContext = createContext<IAppContext | null>(null)
 export const App = () => {
   const values: IAppContext = {
@@ -41,6 +40,7 @@ export const App = () => {
           email="aji@sds.com"
           favColor="Red"
         />
+        <Counter initialValue={0} />
       </AppContext.Provider>
     </>
   )
